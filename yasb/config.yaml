@@ -1,5 +1,3 @@
-# This is default and very simple configuration file for Yasb.
-# For more information about configuration options, please visit the Wiki https://github.com/amnweb/yasb/wiki
 watch_stylesheet: true
 watch_config: true
 debug: false
@@ -24,7 +22,7 @@ bars:
       round_corners_type: "normal"
       border_color: "System"
     window_flags:
-      always_on_top: true
+      always_on_top: false
       windows_app_bar: true
       hide_on_fullscreen: true
     dimensions:
@@ -36,8 +34,7 @@ bars:
       bottom: 0
       right: 0
     widgets:
-      left:
-        ["glazewm_tiling_direction", "glazewm_workspaces", "pomodoro", "clock"]
+      left: ["glazewm_tiling_direction", "glazewm_workspaces", "clock"]
       center: ["active_window"]
       right:
         [
@@ -49,9 +46,11 @@ bars:
           "cpu",
           "memory",
           "notifications",
+          "battery",
           "wallpapers",
           "power_menu",
         ]
+
 widgets:
   home:
     type: "yasb.home.HomeWidget"
@@ -65,30 +64,57 @@ widgets:
       system_menu: true
       power_menu: true
       blur: false
+
   media:
     type: "yasb.media.MediaWidget"
     options:
-      label: "<span>\uf001</span> {title}"
-      label_alt: "<span>\uf001</span> {artist}"
-      callbacks:
-        on_left: "toggle_media_menu"
-        on_middle: "do_nothing"
-        on_right: "do_nothing"
+      label: "{title}"
+      label_alt: "{artist} - {title}"
       max_field_size:
-        label: 50
+        label: 15
         label_alt: 24
       show_thumbnail: true
       controls_only: false
       controls_left: true
+      controls_hide: true
       hide_empty: true
-      thumbnail_alpha: 80
-      thumbnail_padding: 8
-      thumbnail_corner_radius: 16
+      thumbnail_alpha: 100
+      thumbnail_padding: 16
+      thumbnail_corner_radius: 0
+      thumbnail_edge_fade: true
       icons:
-        prev_track: ""
-        next_track: ""
-        play: ""
-        pause: ""
+        prev_track: "\udb81\udcae"
+        next_track: "\udb81\udcad"
+        play: "\udb81\udc0a"
+        pause: "\udb80\udfe4"
+      media_menu:
+        blur: false
+        round_corners: false
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        thumbnail_corner_radius: 4
+        thumbnail_size: 100
+        max_title_size: 80
+        max_artist_size: 20
+        show_source: true
+      label_shadow:
+        enabled: true
+        color: "#000000"
+        radius: 2
+        offset: [1, 1]
+      scrolling_label:
+        enabled: true
+        update_interval_ms: 50
+        style: "bounce" # can be "left", "right", "bounce", "bounce-ease"
+        separator: " | "
+        label_padding: 1
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+
   active_window:
     type: "yasb.active_window.ActiveWindowWidget"
     options:
@@ -100,14 +126,21 @@ widgets:
       max_length: 46
       max_length_ellipsis: "..."
       monitor_exclusive: true
+
   clock:
     type: "yasb.clock.ClockWidget"
     options:
-      label: "{%I:%M:%S}"
-      label_alt: "{%I:%M:%S}"
+      label: "{%a, %d %b %H:%M}"
+      label_alt: "{%A, %d %B %Y %H:%M}"
       timezones: []
+      calendar:
+        blur: true
+        round_corners: false
+        alignment: "center"
+        direction: "down"
       callbacks:
         on_left: "toggle_calendar"
+        on_right: "toggle_label"
   weather:
     type: "yasb.weather.WeatherWidget"
     options:
@@ -143,20 +176,21 @@ widgets:
         alignment: "right"
         direction: "down"
         icon_size: 64
-        show_hourly_forecast: True # Set to False to disable hourly forecast
-        time_format: "12h" # can be 12h or 24h
+        show_hourly_forecast: True
+        time_format: "12h"
         hourly_point_spacing: 76
-        hourly_icon_size: 32 # better to set 16, 32 or 64 for better quality
-        icon_smoothing: true # should be true for smoother icon or false for sharper icon if using 16, 32 or 64 for hourly_icon_size
-        temp_line_width: 2 # can be 0 to hide the temperature line
+        hourly_icon_size: 32
+        icon_smoothing: true
+        temp_line_width: 2
         current_line_color: "#8EAEE8"
-        current_line_width: 1 # can be 0 to hide the current hour line
+        current_line_width: 1
         current_line_style: "dot"
       label_shadow:
         enabled: true
         color: "black"
         radius: 3
         offset: [1, 1]
+
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
@@ -172,6 +206,7 @@ widgets:
       callbacks:
         on_left: "toggle_mute"
         on_right: "exec cmd.exe /c start ms-settings:sound"
+
   microphone:
     type: "yasb.microphone.MicrophoneWidget"
     options:
@@ -184,6 +219,7 @@ widgets:
         on_left: "toggle_mute"
         on_middle: "toggle_label"
         on_right: "exec cmd.exe /c start ms-settings:sound"
+
   power_menu:
     type: "yasb.power_menu.PowerMenuWidget"
     options:
@@ -200,6 +236,7 @@ widgets:
         hibernate: ["\uf28e", "Bear Mode"]
         sleep: ["\u23fe", "Nap Time"]
         cancel: ["", "Nah, Im Good "]
+
   apps:
     type: "yasb.applications.ApplicationsWidget"
     options:
@@ -212,6 +249,7 @@ widgets:
       app_list:
         - { icon: "\ueb03", launch: "cmd /c Taskmgr" }
         - { icon: "\uf489", launch: "wt" }
+
   notifications:
     type: "yasb.notifications.NotificationsWidget"
     options:
@@ -223,13 +261,14 @@ widgets:
         on_left: "toggle_notification"
         on_right: "do_nothing"
         on_middle: "toggle_label"
+
   wallpapers:
     type: "yasb.wallpapers.WallpapersWidget"
     options:
       label: "<span>\udb83\ude09</span>"
       image_path: "C:\\Users\\amanm\\dots\\Wallpaper"
-      change_automatically: false # Automatically change wallpaper
-      update_interval: 60 # If change_automatically is true, update interval in seconds
+      change_automatically: false
+      update_interval: 60
       gallery:
         enabled: true
         blur: true
@@ -243,6 +282,7 @@ widgets:
         lazy_load_fadein: 400
         image_corner_radius: 20
         enable_cache: true
+
   cava:
     type: "yasb.cava.CavaWidget"
     options:
@@ -263,6 +303,7 @@ widgets:
         left: 8
         bottom: 0
         right: 8
+
   cpu:
     type: "yasb.cpu.CpuWidget"
     options:
@@ -274,15 +315,15 @@ widgets:
         medium: 50
         high: 90
       histogram_icons:
-        - "\u2581" # 0%
-        - "\u2581" # 10%
-        - "\u2582" # 20%
-        - "\u2583" # 30%
-        - "\u2584" # 40%
-        - "\u2585" # 50%
-        - "\u2586" # 60%
-        - "\u2587" # 70%
-        - "\u2588" # 80%+
+        - "\u2581"
+        - "\u2581"
+        - "\u2582"
+        - "\u2583"
+        - "\u2584"
+        - "\u2585"
+        - "\u2586"
+        - "\u2587"
+        - "\u2588"
       histogram_num_columns: 8
       callbacks:
         on_right: "exec cmd /c Taskmgr"
@@ -291,23 +332,17 @@ widgets:
         color: "black"
         radius: 3
         offset: [1, 1]
+
   glazewm_workspaces:
     type: "glazewm.workspaces.GlazewmWorkspacesWidget"
     options:
-      # Offline behavior (matching komorebi's label_offline and hide_if_offline)
       offline_label: "GlazeWM Offline"
       hide_if_offline: true
-
-      # Workspace display labels (matching komorebi's label_workspace_btn and label_workspace_active_btn)
       populated_label: "{display_name}"
       empty_label: "{display_name}"
       active_populated_label: "{display_name}"
       active_empty_label: "{display_name}"
-
-      # Workspace management (matching komorebi's hide_empty_workspaces)
       hide_empty_workspaces: true
-
-      # Additional GlazeWM-specific options (keeping defaults)
       enable_scroll_switching: true
       reverse_scroll_direction: true
       container_padding:
@@ -315,6 +350,7 @@ widgets:
         left: 0
         bottom: 0
         right: 0
+
   glazewm_tiling_direction:
     type: "glazewm.tiling_direction.GlazewmTilingDirectionWidget"
     options:
@@ -325,53 +361,7 @@ widgets:
         color: "black"
         radius: 3
         offset: [1, 1]
-  pomodoro:
-    type: "yasb.pomodoro.PomodoroWidget"
-    options:
-      label: "<span>{icon}</span> {remaining}"
-      label_alt: "<span>{icon}</span> {session}/{total_sessions} - {status}"
-      work_duration: 25
-      break_duration: 5
-      long_break_duration: 15
-      long_break_interval: 4
-      auto_start_breaks: true
-      auto_start_work: true
-      sound_notification: true
-      show_notification: true
-      hide_on_break: false
-      session_target: 8
-      icons:
-        work: "\uf252"
-        break: "\uf253"
-        paused: "\uf254"
-      container_padding:
-        top: 0
-        left: 12
-        bottom: 0
-        right: 12
-      menu:
-        blur: true
-        round_corners: true
-        round_corners_type: "normal"
-        border_color: "System"
-        alignment: "right"
-        direction: "down"
-        offset_top: 6
-        offset_left: 0
-        circle_background_color: "#09ffffff"
-        circle_work_progress_color: "#88c0d0"
-        circle_break_progress_color: "#a3be8c"
-        circle_thickness: 8
-        circle_size: 160
-      callbacks:
-        on_left: "toggle_menu"
-        on_middle: "reset_timer"
-        on_right: "toggle_label"
-      label_shadow:
-        enabled: true
-        color: "black"
-        radius: 3
-        offset: [1, 1]
+
   memory:
     type: "yasb.memory.MemoryWidget"
     options:
@@ -386,3 +376,34 @@ widgets:
         color: "black"
         radius: 5
         offset: [0, 0]
+
+  battery:
+    type: "yasb.battery.BatteryWidget"
+    options:
+      label: "<span>{icon}</span> {percent}%"
+      label_alt: "<span>{icon}</span> {percent}% | time: {time_remaining}"
+      update_interval: 5000
+      time_remaining_natural: false
+      hide_unsupported: false
+      charging_options:
+        icon_format: "{charging_icon}"
+        blink_charging_icon: true
+        blink_interval: 500
+      status_thresholds:
+        critical: 10
+        low: 25
+        medium: 75
+        high: 95
+        full: 100
+      status_icons:
+        icon_charging: "\uf0e7"
+        icon_critical: "\uf244"
+        icon_low: "\uf243"
+        icon_medium: "\uf242"
+        icon_high: "\uf241"
+        icon_full: "\uf240"
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [1, 1]
