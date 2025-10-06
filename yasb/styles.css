@@ -1,32 +1,72 @@
+:root {
+  --rosewater: #f5e0dc;
+  --flamingo: #f2cdcd;
+  --pink: #f5c2e7;
+  --mauve: #cba6f7;
+  --red: #f38ba8;
+  --maroon: #eba0ac;
+  --peach: #fab387;
+  --yellow: #f9e2af;
+  --green: #a6e3a1;
+  --teal: #94e2d5;
+  --sky: #89dceb;
+  --sapphire: #74c7ec;
+  --blue: #89b4fa;
+  --lavender: #b4befe;
+  --text: #cdd6f4;
+  --subtext1: #bac2de;
+  --subtext0: #a6adc8;
+  --overlay2: #9399b2;
+  --overlay1: #7f849c;
+  --overlay0: #6c7086;
+  --surface2: #585b70;
+  --surface1: #45475a;
+  --surface0: #282936;
+  --base: #000000;
+  --mantle: rgba(0, 0, 0, 0.5);
+  --crust: rgba(0, 0, 0, 0.5);
+}
 * {
   font-size: 12px;
-  color: #cdd6f4;
-  font-weight: 500;
+  color: var(--subtext0);
+  font-weight: 600;
   font-family: "JetBrainsMono NFP";
   margin: 0;
   padding: 0;
 }
 .yasb-bar {
-  padding: 0 8px;
+  padding: 0;
   margin: 0;
-  background-color: #000000;
-  border-radius: 0px;
+  background-color: var(--crust);
 }
 .widget {
-  padding: 0 10px;
+  padding: 0 7px;
   margin: 0;
+}
+.icon {
+  font-size: 15px;
 }
 .widget .label {
-  padding: 2px 2px 1px 2px;
+  padding: 0px 2px;
 }
-.widget .label.alt {
-  padding: 1px 8px 1px 8px;
+
+.widget-container {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  margin-left: 4px;
 }
-.clock-widget .label {
-  padding-left: 8px;
+
+.apps-widget .widget-container {
+  background-color: var(--crust);
+  margin: 4px 0 4px 0;
+  border-radius: 12px;
+  border: 0px solid var(--surface1);
+  padding: 0 8px;
 }
 .glazewm-workspaces {
-  margin: 0;
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+  padding: 0 4px 0 0;
 }
 
 .glazewm-workspaces .ws-btn {
@@ -35,29 +75,29 @@
   border: none;
   padding: 0 5px 0 5px;
   margin: 0;
-  color: #95a0ad;
+  color: var(--crust);
 }
 
 .glazewm-workspaces .ws-btn.active_populated {
-  color: #89b4fa;
+  color: var(--blue);
 }
 
 .glazewm-workspaces .ws-btn.active_empty {
-  color: #ffffff;
+  color: var(--blue);
 }
 
 .glazewm-workspaces .ws-btn.populated {
-  color: #74c7ec;
+  color: var(--blue);
 }
 
 .glazewm-workspaces .ws-btn.empty {
-  color: #ffffff;
+  color: var(--rosewater);
 }
 
 .glazewm-workspaces .ws-btn:hover,
 .glazewm-workspaces .ws-btn.populated:hover,
 .glazewm-workspaces .ws-btn.empty:hover {
-  color: #ffffff;
+  color: var(--blue);
 }
 
 .glazewm-tiling-direction {
@@ -69,144 +109,185 @@
 .glazewm-tiling-direction .btn {
   font-size: 18px;
   width: 14px;
-  padding: 0 4px 0 4px;
-  color: #cdd6f4;
+  padding: 0 4px 0 10px;
+  color: var(--subtext1);
   border: none;
 }
 
 .glazewm-tiling-direction .btn:hover {
-  background-color: #727272;
+  background-color: var(--overlay0);
 }
-/*POWER MENU WIDGET*/
-/* Uptime text */
+
+.apps-widget .label {
+  font-size: 14px;
+  padding: 0 2px;
+  color: var(--subtext0);
+}
+.apps-widget .label:hover {
+  color: var(--text);
+}
 .uptime {
   font-size: 14px;
   margin-bottom: 10px;
-  color: rgba(191, 202, 219, 0.726);
+  color: var(--surface2);
   font-weight: 600;
-  font-family: "JetBrainsMono NFP";
 }
 .power-menu-widget .label {
-  color: #eba0ac;
-  font-size: 16px;
+  color: #f38ba8;
+  font-size: 13px;
+}
+.power-menu-popup {
+  background-color: transparent;
 }
 .power-menu-popup .button {
   padding: 0;
-  width: 160px;
-  height: 240px;
-  border-radius: 4px;
-  background-color: rgba(41, 42, 58, 0.75);
-  font-family: "JetBrainsMono NFP";
-  color: white;
-  border: 4px solid rgba(255, 255, 255, 0);
+  width: 180px;
+  height: 230px;
+  border-radius: 8px;
+  background-color: var(--base);
+  color: var(--text);
+  border-left: 4px solid rgba(58, 59, 83, 0);
+  border-right: 4px solid rgba(58, 59, 83, 0);
+  border-top: 8px solid rgba(58, 59, 83, 0);
+  border-bottom: 8px solid rgba(58, 59, 83, 0);
+  margin: 0px;
 }
 .power-menu-popup .button.hover {
-  background-color: rgb(55, 56, 75);
-  border: 4px solid rgb(55, 56, 75);
+  background-color: var(--surface0);
+  border-left: 4px solid var(--surface0);
+  border-right: 4px solid var(--surface0);
+  border-top: 8px solid var(--surface0);
+  border-bottom: 8px solid var(--surface0);
 }
 .power-menu-popup .button .label {
   margin-bottom: 8px;
   font-size: 16px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
-  font-family: "JetBrainsMono NFP";
+  font-weight: 500;
+  color: var(--surface2);
 }
 .power-menu-popup .button .icon {
   font-size: 64px;
-  padding-top: 54px;
-  color: rgba(255, 255, 255, 0.25);
+  padding-top: 32px;
+  color: var(--surface2);
+}
+.power-menu-popup .button.cancel .icon {
+  padding: 0;
+  margin: 0;
+}
+.power-menu-popup .button.cancel .label {
+  color: var(--red);
+  margin: 0;
 }
 .power-menu-popup .button.cancel {
-  height: 20px !important; /* Much thinner than the 240px of other buttons */
-  width: 100%; /* Full width to span across */
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.power-menu-popup .button.cancel .icon {
-  font-size: 24px !important; /* Smaller icon for the thinner button */
-  padding-top: 0px !important; /* Remove the large top padding */
-  color: rgba(243, 139, 168, 0.55);
-}
-
-.power-menu-popup .button.cancel .label {
-  margin-bottom: 0px !important; /* Remove bottom margin */
-  color: rgba(243, 139, 168, 0.95);
-}
-/* ICONS */
-.icon {
-  font-size: 16px;
+  height: 32px;
+  border-radius: 4px;
 }
 .volume-widget .icon {
-  color: #89b4fa;
+  color: var(--blue);
   margin: 1px 2px 0 0;
 }
-.start-menu .icon {
+
+.weather-widget,
+.volume-widget {
+  padding: 0 6px;
+}
+.weather-widget .icon {
   font-size: 18px;
-  color: #89b4fa;
+  margin: 0 2px 1px 0;
+  color: var(--yellow);
 }
-.clock-widget .icon {
-  color: #cba6f7;
+
+.wallpapers-widget .icon {
+  font-size: 17px;
+  padding: 0 0 0 0;
+  color: var(--mauve);
+}
+
+.wallpapers-widget {
+  padding: 0 6px 0 6px;
+}
+.wallpapers-gallery-window {
+  background-color: rgba(85, 42, 240, 0.01);
+  border: 0;
+  margin: 0;
+}
+.wallpapers-gallery-buttons {
+  background-color: rgba(255, 255, 255, 0);
+  color: var(--text);
+  border: none;
   font-size: 14px;
-}
-/* WEATHER WIDGET */
-.weather-card {
-  background-color: rgba(17, 17, 27, 0.5);
-}
-.weather-card-today {
-  border: 1px solid #282936;
+  padding: 8px 0;
   border-radius: 8px;
-  background-color: rgba(17, 17, 27, 0.2);
+  margin: 0 8px 8px 8px;
+  width: 600px;
 }
-.weather-card-today .label {
+.wallpapers-gallery-buttons:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.wallpapers-gallery-image {
+  border: 4px solid transparent;
+  border-radius: 10px;
+}
+.wallpapers-gallery-image:hover {
+  border: 4px solid var(--sapphire);
+}
+.wallpapers-gallery-image.focused {
+  border: 4px solid var(--sapphire);
+}
+
+.calendar {
+  background-color: rgba(17, 17, 27, 0.4);
+}
+.calendar .calendar-table,
+.calendar .calendar-table::item {
+  background-color: rgba(17, 17, 27, 0);
+  color: rgba(162, 177, 196, 0.85);
+  font-family: "Segoe UI";
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+.calendar .calendar-table::item:selected {
+  color: rgb(255, 255, 255);
+  background-color: #007acc;
+  border-radius: 10px;
+}
+.calendar .day-label {
+  margin-top: 20px;
+}
+.calendar .day-label,
+.calendar .month-label,
+.calendar .date-label,
+.calendar .week-label,
+.calendar .holiday-label {
+  font-family: "Segoe UI";
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+  min-width: 180px;
+  max-width: 180px;
+}
+.calendar .week-label,
+.calendar .holiday-label {
   font-size: 12px;
+  font-weight: 600;
+  color: rgba(162, 177, 196, 0.85);
 }
-.weather-card-today .label.location {
-  font-size: 24px;
+.calendar .holiday-label {
+  color: rgba(162, 177, 196, 0.85);
   font-weight: 700;
 }
-.weather-card-today .label.alert {
-  font-size: 12px;
-  font-weight: 700;
-  background-color: rgba(247, 199, 42, 0.05);
-  border: 1px solid rgba(247, 209, 42, 0.1);
-  color: rgba(196, 181, 162, 0.85);
-  border-radius: 6px;
-  padding: 5px 0;
+.calendar .month-label {
+  font-weight: normal;
 }
-.weather-card-day {
-  border: 1px solid #45475a;
-  border-radius: 8px;
-  background-color: rgba(17, 17, 27, 0.2);
+.calendar .date-label {
+  font-size: 88px;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+  margin-top: -20px;
 }
 
-.weather-card-day.active {
-  background-color: rgba(40, 40, 60, 0.6);
-  border: 1px solid rgba(50, 50, 75, 1);
-}
-
-.weather-card-day:hover {
-  background-color: rgba(40, 40, 60, 0.6);
-}
-
-.weather-card-day .label {
-  font-size: 12px;
-}
-
-.weather-card .hourly-container {
-  border: 1px solid #282936;
-  background-color: #3c5fa0;
-  border-radius: 8px;
-  min-height: 150px;
-}
-
-.weather-card .hourly-data {
-  /* font-family: 'Segoe UI';*/
-  /* color: cyan;*/ /* <- Font color */
-  background-color: #fae93f; /* <- Curve color */
-  font-size: 12px;
-  font-weight: bold;
-}
 .media-widget {
   padding: 0;
   margin: 0;
@@ -325,151 +406,94 @@ Example: "Windows Media" becomes "windows-media" */
   margin: 0 -6px;
   padding-left: 4px;
 }
-.pomodoro-widget {
-  padding: 0 0 0 0;
-}
-.pomodoro-widget .icon {
-  font-size: 12px;
-  padding-right: 4px;
-}
-.pomodoro-widget .label.paused,
-.pomodoro-widget .icon.paused {
-  color: #7d7e8b;
-}
-.pomodoro-widget .label.work,
-.pomodoro-widget .icon.work {
-  color: #a6e3a1;
-}
-.pomodoro-widget .label.break,
-.pomodoro-widget .icon.break {
-  color: #89b4fa;
-}
-/* Pomodoro menu styling */
-.pomodoro-menu {
-  background-color: rgba(17, 17, 27, 0.2);
-  border-radius: 8px;
-}
-.pomodoro-menu .header {
-  font-size: 16px;
-  font-weight: 600;
-  max-height: 0px;
-  color: #ffffff;
-}
-.pomodoro-menu .status {
-  font-size: 18px;
-  font-weight: 600;
-  color: #cdd6f4;
-}
-.pomodoro-menu .session {
-  font-size: 12px;
-  color: #a6adc8;
-}
-.pomodoro-menu .button {
-  background-color: #3f4053;
-  color: #cdd6f4;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 12px;
-}
-.pomodoro-menu .button.start {
-  background-color: #3f4053;
-}
-.pomodoro-menu .button.reset {
-  background-color: #3f4053;
-}
-.pomodoro-menu .button:hover {
-  background-color: rgba(255, 255, 255, 0.158);
-}
-.pomodoro-menu .button.pause {
-  background-color: #a6e3a1;
-  color: #1e1e2e;
-}
-.pomodoro-menu .button:pressed {
-  background-color: #5a5b6e;
-}
 
-.calendar {
-  background-color: rgba(17, 17, 27, 0.4);
+.disk-group {
+  background-color: rgba(17, 17, 27, 0.75);
 }
-.calendar .calendar-table,
-.calendar .calendar-table::item {
-  background-color: rgba(17, 17, 27, 0);
-  color: rgba(162, 177, 196, 0.85);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.disk-group-row {
+  min-width: 220px;
+  max-width: 220px;
+  max-height: 40px;
   margin: 0;
   padding: 0;
-  border: none;
-  outline: none;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0);
 }
-.calendar .calendar-table::item:selected {
-  color: rgb(255, 255, 255);
-  background-color: #007acc;
-  border-radius: 10px;
+.disk-group-row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.calendar .day-label {
-  margin-top: 20px;
+.disk-group-label-bar {
+  max-height: 8px;
+  border: 0px solid rgba(128, 128, 128, 0);
+  background-color: rgba(137, 180, 250, 0.1);
+  border-radius: 4px;
 }
-.calendar .day-label,
-.calendar .month-label,
-.calendar .date-label,
-.calendar .week-label,
-.calendar .holiday-label {
-  font-family: "Segoe UI";
-  font-size: 16px;
-  color: #fff;
-  font-weight: 700;
-  min-width: 180px;
-  max-width: 180px;
+.disk-group-label-bar::chunk {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
-.calendar .week-label,
-.calendar .holiday-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(162, 177, 196, 0.85);
+.disk-group-label {
+  font-size: 10px;
 }
-.calendar .holiday-label {
-  color: rgba(162, 177, 196, 0.85);
-  font-weight: 700;
-}
-.calendar .month-label {
-  font-weight: normal;
-}
-.calendar .date-label {
-  font-size: 88px;
-  font-weight: 900;
-  color: rgb(255, 255, 255);
-  margin-top: -20px;
+.disk-group-label-size {
+  font-size: 10px;
+  color: #585b70;
 }
 
-.wallpapers-widget {
-  padding: 0 6px 0 6px;
+.battery-widget .icon {
+  color: var(--sapphire);
 }
 
-.wallpapers-gallery-window {
-  background-color: rgba(85, 42, 240, 0.01);
-  border: 0;
+.cpu-widget .icon {
+  color: var(--sky);
+}
+
+.memory-widget .icon {
+  color: var(--pink);
+}
+
+.disk-widget .icon {
+  color: var(--teal);
+}
+
+/* Disk dropdown */
+.disk-group {
+  background-color: var(--mantle);
+}
+
+.disk-group-row {
+  min-width: 220px;
+  max-width: 220px;
+  max-height: 40px;
   margin: 0;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid transparent;
 }
-.wallpapers-gallery-buttons {
-  background-color: rgba(255, 255, 255, 0);
-  color: white;
-  border: none;
-  font-size: 14px;
-  padding: 8px 0;
-  border-radius: 8px;
-  margin: 0 8px 8px 8px;
-  width: 600px;
+
+.disk-group-row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.wallpapers-gallery-buttons:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+
+.disk-group-label-bar {
+  max-height: 8px;
+  border: 0;
+  background-color: rgba(1, 2, 2, 0.3);
+  border-radius: 4px;
 }
-.wallpapers-gallery-image {
-  border: 4px solid transparent;
-  border-radius: 10px;
+
+.disk-group-label-bar::chunk {
+  background-color: var(--teal);
+  border-radius: 4px;
 }
-.wallpapers-gallery-image:hover {
-  border: 4px solid rgb(66, 68, 83);
+
+.disk-group-label {
+  font-size: 13px;
 }
-.wallpapers-gallery-image.focused {
-  border: 4px solid #89b4fa;
+
+.disk-group-label-size {
+  font-size: 12px;
+  color: rgba(205, 214, 244, 0.5);
 }
